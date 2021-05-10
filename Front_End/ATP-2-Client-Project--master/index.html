@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Book</title>
+    <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script> -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- <script type="text/javascript" src="js/jquery-3.3.1.js"></script> -->
+    <!-- <script type="text/javascript" src="js/UserScript.js"></script> -->
+    <script type="text/javascript" src="js/script.js"></script>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+
+            <a class="navbar-brand" href="#">Book Binder</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <input type="text" id="txtSearch" placeholder="Title or Author" />
+                        <button class="btn btn-primary" id="txtBtn">
+                            Search
+                        </button>
+                    </li>
+
+                    <li class="nav-item active">
+                        <input type="text" id="txtSearchUser" placeholder="UserName" />
+                        <button class="btn btn-primary" id="txtBtnSearchUser">
+                            Search User
+                        </button>
+                    </li>
+
+                    <li class="nav-item active">
+                        <button class="btn btn-primary" id="txtHome">
+                            Home
+                        </button>
+                    </li>
+                    <li class="nav-item active">
+                        <button class="btn btn-primary" id="txtNewsFeed">
+                            NewsFeed
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <!-- <a class="nav-link" href="" id="btnCategory">Category</a> -->
+                        <button id="btnCategory" type="button" class="btn btn-primary">
+                            Category
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <!-- Button trigger modal -->
+                        <button id="logIn" type="button" class="btn btn-primary">
+                            Sign In
+                        </button>
+                    </li>
+                    <button id="profile" class="btn btn-primary">Profile</button>
+                    </li>
+                    <li>
+                        <button id="logOut" type="button" class="btn btn-primary" style="display: none;">Log Out</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid" id="main-container">
+        <div class="row uniqueCategory" style="display: none;">
+            <table class="table table-striped table-hover" id="list">
+                <thead>
+                    <tr>
+                        <th scope="col">Category</th>
+                    </tr>
+                </thead>
+                <tbody id="categoryBody">
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row BookDetails" style="display: none;">
+            <button id="createBookBtn" class="col-sm-2 offset-sm-5 btn btn-primary mb-2" style="display: none;">Create Books</button>
+            <button id="showBook" class="col-sm-2 offset-sm-5 btn btn-primary mb-2">Show All Books</button>
+            <br>
+            <br>
+            <table class="table table-striped table-hover" id="list">
+                <thead>
+                    <tr>
+                        <th scope="col">Image</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Author</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Rating</th>
+                        <th scope="col" colspan="3">Description</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody id="tblBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row userDetails" style="display: none;">
+            <div class="show-searched-user">
+    
+            </div>
+        </div>
+    </div>
+
+    <div class="row LogInContainer" style="display: none;">
+        <!-- <form method=""> -->
+        <div>
+            <input required type="email" class="span3" name="email" id="checkEmail" required placeholder="Email">
+        </div>
+        <div>
+            <input required type="password" class="span3" name="password" id="checkPassword" required placeholder="Password">
+        </div>
+        <div id="message"></div>
+        <div>
+            <p id="registrationLink">Don't have an account?</p>
+        </div>
+        <div>
+            <button type="submit" id="checkSubmit" class="btn btn-primary">Sign in</button>
+        </div>
+        <!-- </form> -->
+    </div>
+
+        <div class="row registrationContainer" style="display: none;">
+            <label class="col-sm-2 col-form-label">User Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="txtUserName" required placeholder="Type your Name">
+            </div>
+            <label class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" id="txtEmail" required placeholder="Type your Email">
+            </div>
+            <label class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="txtPassword" required placeholder="Type your Password">
+            </div>
+            <div class="col-sm-10">
+                <input type="file" class="form-control-file" id="txtImage" >
+            </div>
+            <button type="submit" id="createUser" class="col-sm-9 offset-md-2 btn btn-primary mb-2">Create Account</button>
+        </div>
+
+    <div class="row editContainer" style="display: none;">
+        <!-- <button id="editBook1" class="col-sm-9 offset-md-2 btn btn-primary mb-2">EditBook1</button> -->
+        <!-- <form> -->
+        <!-- <div class="form-group row"> -->
+        <label class="col-sm-2 col-form-label">Title</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="editTitle">
+        </div>
+        <!-- </div> -->
+        <!-- <div class="form-group row"> -->
+        <label class="col-sm-2 col-form-label">Author</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="editAuthor">
+        </div>
+        <!-- </div> -->
+        <!-- <div class="form-group row"> -->
+        <label class="col-sm-2 col-form-label">Category</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="editCategory">
+        </div>
+        <!-- </div> -->
+        <!-- <div class="form-group row"> -->
+        <label class="col-sm-2 col-form-label">Description</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="editDescription">
+            <input type="hidden" id="editId">
+        </div>
+        <!-- </div> -->
+        <button type="submit" id="editBook" class="col-sm-9 offset-md-2 btn btn-primary mb-2">Edit Book</button>
+        <!-- </form> -->
+    </div>
+
+    <div class="row createContainer" style="display: none;">
+        <!-- <form> -->
+        <!-- <div class="form-group row"> -->
+        <label class="col-sm-2 col-form-label">Title</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="txtTitle" placeholder="Title of the Book">
+        </div>
+        <!-- </div> -->
+        <!-- <div class="form-group row"> -->
+        <label class="col-sm-2 col-form-label">Author</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="txtAuthor" placeholder="Author of the Book">
+        </div>
+        <!-- </div> -->
+        <!-- <div class="form-group row"> -->
+        <label class="col-sm-2 col-form-label">Category</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="txtCategory" placeholder="Category of the Book">
+        </div>
+        <!-- </div> -->
+        <!-- <div class="form-group row"> -->
+        <label class="col-sm-2 col-form-label">Description</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="txtDescription" placeholder="Description of the Book">
+        </div>
+        <button type="submit" id="createBook" class="col-sm-9 offset-md-2 btn btn-primary mb-2">Create New Book</button>
+        <!-- </form> -->
+    </div>
+
+
+    <div class="row editUserContainer" style="display: none;">
+        <label class="col-sm-2 col-form-label">User Name</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="editUserName" placeholder="Type your Name">
+        </div>
+        <label class="col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" id="editUserPassword" placeholder="Type your Password">
+        </div>
+        <input type="hidden" id="editUserId">
+        <button type="submit" id="editUserProfileBtn" class="col-sm-9 offset-md-2 btn btn-primary mb-2">Edit Account</button>
+    </div>
+
+    <div class="UserProfileContainer" style="display: none;">
+        <div class="row">
+            <!-- <button id="loadProfile">Load Profile</button> -->
+            <div class="col-md-3">
+                <div class="card" style="margin:10px">
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Average Rating:
+                                <p id="averageRatingUser"></p>
+                            </li>
+                            <li class="list-group-item">Total:
+                                <p id="totalRead"></p>
+                            </li>                           
+                            <li class="list-group-item">
+                                <select name="readStatus" id="userOptionSelect">
+                                    <!-- onchange="LoadList(this)"> -->
+                                    <option value="" selected disabled hidden>Choose here</option>
+                                    <option value="0">Show All Books</option>
+                                    <option value="1">Already Read</option>
+                                    <option value="2">Currently Reading</option>
+                                    <option value="3">Want to Read</option>
+                                </select>
+                            </li>
+                            <li>
+                                <img src="" alt="imageTag" id="userImage">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="jumbotron jumbotron-fluid" style="margin:10px">
+                    <div class="container">
+                        <h1 class="display-4" id="profileName"></h1>
+                        <p class="lead" id="profileEmail"></p>
+                        <p class="lead">
+                            <button class="btn btn-primary btn-lg" id="editUserProfile">Edit Profile</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table table-striped table-hover" id="list">
+                <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Author</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Rating</th>
+                        <th scope="col" colspan="3">Description</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody id="profileTable">
+                </tbody>
+            </table>
+            <!-- <div class="col-md-12">
+                <div id="AlreadyRead" class="jumbotron jumbotron-fluid" style="margin:10px">
+                    <h3 style="margin:20px;font-family:Comic Sans MS">Books that already have been read by </h3>
+
+                </div>
+                <div id="CurrentlyRead" class="jumbotron jumbotron-fluid" style="margin:10px">
+                    <h3 style="margin:20px;font-family:Comic Sans MS">Books that currently reading.</h3>
+
+                </div>
+                <div id="WantRead" class="jumbotron jumbotron-fluid" style="margin:10px">
+                    <h3 style="margin:20px;font-family:Comic Sans MS">Books that wants to read.</h3>
+
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+
+        <!-- Newsfeed -->
+
+        <div class="container-fluid">
+            <div class="row newsfeed" style="display: none;">
+                <div class="show-newsfeed">
+        
+                </div>
+            </div>
+        </div>
+
+
+
+
+    <!-- Button trigger modal -->
+    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Launch demo modal
+    </button> -->
+
+    <!-- <button id="modalButton">mODAL </button> -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        <p class="modalTitle"></p>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="card" style="margin:10px">
+                                <div class="card-body">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            Rate the book:
+                                            <select id="review" name="review">
+                                                <option value="" selected disabled hidden>Choose here</option>
+                                                <option value="1">bad</option>
+                                                <option value="2">very bad</option>
+                                                <option value="3">moderate</option>
+                                                <option value="4">good</option>
+                                                <option value="5">very good</option>
+                                            </select>
+                                        </li>
+
+
+                                        <li class="list-group-item">
+                                            Change the status:
+                                            <select id="readStatus" name="readStatus">
+                                                <option value="" selected disabled hidden>Choose here</option>
+                                                <option value="1">Already Read</option>
+                                                <option value="2">Currently Reading</option>
+                                                <option value="3">Want to Read</option>
+                                            </select>
+                                        </li>
+
+                                        <input type="hidden" id="modalId">
+                                        <li class="list-group-item">Title:
+                                            <p class="modalTitle"></p>
+                                        </li>
+
+                                        <li class="list-group-item">Author:
+                                            <p id="modalAuthor"></p>
+                                        </li>
+
+                                        <li class="list-group-item">Category:
+                                            <p id="modalCategory"></p>
+                                        </li>
+
+                                        <li class="list-group-item">Review:
+                                            <p id="modalReview"></p>
+                                        </li>
+                                        
+                                        <li class="list-group-item">Description:
+                                            <p id="modalDescription"></p>
+                                        </li>    
+                                        
+                                        <li class="list-group-item">Upload Book:
+                                            <input class="form-control" type="file" id="modalBookUpload"/>
+                                            <button type="button" class="btn btn-primary" id="uploadFile">Upload</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="ratingChanges">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <!-- Footer -->
+    <footer class="py-5 footer-transparent">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; ATP 2 Project</p>
+        </div>
+        <!-- /.container -->
+    </footer>
+    <footer class="footer footer-transparent">
+        <div class="container">
+            <p class="m-0 text-center">Copyright &copy; Shihab</p>
+        </div>
+    </footer>
+</body>
+
+</html>
