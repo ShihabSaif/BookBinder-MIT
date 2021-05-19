@@ -28,3 +28,18 @@ D:\on going final project\on going final project\backup_of_ATP2Final\ATP2FInal\B
 D:\on going final project\on going final project\backup_of_ATP2Final\ATP2FInal\BMSRepository\obj\Debug\BMSRepository.csproj.CopyComplete
 D:\on going final project\on going final project\backup_of_ATP2Final\ATP2FInal\BMSRepository\obj\Debug\BMSRepository.exe
 D:\on going final project\on going final project\backup_of_ATP2Final\ATP2FInal\BMSRepository\obj\Debug\BMSRepository.pdb
+E:\Shihab\BookBinder-MIT\Backend_API\ATP2FInal\BMSRepository\bin\Debug\BMSRepository.exe.config
+E:\Shihab\BookBinder-MIT\Backend_API\ATP2FInal\BMSRepository\bin\Debug\BMSRepository.exe
+E:\Shihab\BookBinder-MIT\Backend_API\ATP2FInal\BMSRepository\bin\Debug\BMSRepository.pdb
+E:\Shihab\BookBinder-MIT\Backend_API\ATP2FInal\BMSRepository\bin\Debug\BMSEntity.exe
+E:\Shihab\BookBinder-MIT\Backend_API\ATP2FInal\BMSRepository\bin\Debug\EntityFramework.dll
+E:\Shihab\BookBinder-MIT\Backend_API\ATP2FInal\BMSRepository\bin\Debug\EntityFramework.SqlServer.dll
+E:\Shihab\BookBinder-MIT\Backend_API\ATP2FInal\BMSRepository\bin\Debug\BMSEntity.pdb
+E:\Shihab\BookBinder-MIT\Backend_API\ATP2FInal\BMSRepository\bin\Debug\BMSEntity.exe.config
+E:\Shihab\BookBinder-MIT\Backend_API\ATP2FInal\BMSRepository\bin\Debug\EntityFramework.xml
+E:\Shihab\BookBinder-MIT\Backend_API\ATP2FInal\BMSRepository\bin\Debug\EntityFramework.SqlServer.xml
+E:\Shihab\BookBinder-MIT\Backend_API\ATP2FInal\BMSRepository\obj\Debug\BMSRepository.csprojAssemblyReference.cache
+E:\Shihab\BookBinder-MIT\Backend_API\ATP2FInal\BMSRepository\obj\Debug\BMSRepository.csproj.CoreCompileInputs.cache
+E:\Shihab\BookBinder-MIT\Backend_API\ATP2FInal\BMSRepository\obj\Debug\BMSRepository.csproj.CopyComplete
+E:\Shihab\BookBinder-MIT\Backend_API\ATP2FInal\BMSRepository\obj\Debug\BMSRepository.exe
+E:\Shihab\BookBinder-MIT\Backend_API\ATP2FInal\BMSRepository\obj\Debug\BMSRepository.pdb
