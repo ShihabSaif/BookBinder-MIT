@@ -36,44 +36,47 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
                         <input type="text" id="txtSearch" placeholder="Title or Author" />
-                        <button class="btn btn-primary" id="txtBtn">
+                        <button class="btn btn-outline-primary" id="txtBtn">
                             Search
                         </button>
                     </li>
 
                     <li class="nav-item active">
-                        <input type="text" id="txtSearchUser" placeholder="UserName" />
-                        <button class="btn btn-primary" id="txtBtnSearchUser">
+                        <input type="text" id="txtSearchUser" placeholder="UserName" style="margin-left: 5px;" />
+                        <button class="btn btn-outline-primary" id="txtBtnSearchUser">
                             Search User
                         </button>
                     </li>
 
                     <li class="nav-item active">
-                        <button class="btn btn-primary" id="txtHome">
+                        <a href="#" class="nav-link" id="txtHome">
                             Home
-                        </button>
+                        </a>
+                    </li>
+
+                    <li class="nav-item active">
+                        <a href="#" class="nav-link" id="txtNewsFeed">
+                            NewsFeed
+                        </a>
+                    </li>
+
+                    <li class="nav-item active">                       
+                        <a href="#" class="nav-link" id="btnCategory">
+                            Category
+                        </a>
                     </li>
                     <li class="nav-item active">
-                        <button class="btn btn-primary" id="txtNewsFeed">
-                            NewsFeed
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <!-- <a class="nav-link" href="" id="btnCategory">Category</a> -->
-                        <button id="btnCategory" type="button" class="btn btn-primary">
-                            Category
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <!-- Button trigger modal -->
-                        <button id="logIn" type="button" class="btn btn-primary">
+                        <a href="#" class="nav-link" id="logIn">
                             Sign In
-                        </button>
+                        </a>
                     </li>
-                    <button id="profile" class="btn btn-primary">Profile</button>
+                    
+                    <li class="nav-item active">
+                        <a href="#" class="nav-link" id="profile">Profile</a>
                     </li>
-                    <li>
-                        <button id="logOut" type="button" class="btn btn-primary" style="display: none;">Log Out</button>
+
+                    <li class="nav-item active">
+                        <a href="#" class="nav-link" id="logOut"  style="display: none;">Log Out</a>
                     </li>
                 </ul>
             </div>
@@ -123,24 +126,57 @@
             </div>
         </div>
     </div>
-
-    <div class="row LogInContainer" style="display: none;">
-        <!-- <form method=""> -->
-        <div>
-            <input required type="email" class="span3" name="email" id="checkEmail" required placeholder="Email">
-        </div>
-        <div>
-            <input required type="password" class="span3" name="password" id="checkPassword" required placeholder="Password">
-        </div>
-        <div id="message"></div>
-        <div>
-            <p id="registrationLink">Don't have an account?</p>
-        </div>
-        <div>
-            <button type="submit" id="checkSubmit" class="btn btn-primary">Sign in</button>
-        </div>
-        <!-- </form> -->
+</div>
+    
+<!-- <div class="container LogInContainer" style="display: none;">
+    <div class="d-flex justify-content-center h-100">
+        <div class="card">
+            <div class="card-header">
+                <h3>Sign In</h3>
+            </div>
+            <div class="card-body">              
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        <input type="text" class="form-control" name="email" id="checkEmail" placeholder="username">                       
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input type="password" class="form-control" name="password" id="checkPassword" placeholder="password">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" id="checkSubmit" value="Login" class="btn float-right login_btn">
+                    </div>
+                
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-center links">
+                    Don't have an account?<a href="#">Sign Up</a>
+                </div>
+            </div>
     </div>
+</div> -->
+
+    
+        <div class="row LogInContainer" style="display: none;">
+            <div>
+                <input required type="email" class="span3" name="email" id="checkEmail" required placeholder="Email">
+            </div>
+            <div>
+                <input required type="password" class="span3" name="password" id="checkPassword" required placeholder="Password">
+            </div>
+            <div id="message"></div>
+            <div>
+                <p id="registrationLink">Don't have an account?</p>
+            </div>
+            <div>
+                <button type="submit" id="checkSubmit" class="btn btn-primary">Sign in</button>
+            </div>
+        </div>
+   
 
         <div class="row registrationContainer" style="display: none;">
             <label class="col-sm-2 col-form-label">User Name</label>
