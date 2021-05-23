@@ -674,6 +674,31 @@ $(function () {
 		});
 	};
 
+	$('#btnPostFile').click(function () {  
+		if ($('#file1').val() == '') {  
+			alert('Please select file');  
+			return;  
+		}  
+
+		var formData = new FormData();  
+		var file = $('#file1')[0];  
+		formData.append('file', file.files[0]);  
+		$.ajax({  
+			url: 'http://localhost:50477//api//User/upload',  
+			type: 'POST',  
+			data: formData,  
+			contentType: false,  
+			processData: false,  
+			success: function (d) {  
+				$('#updatePanelFile').addClass('alert-success').html('<strong>Upload Done!</strong><a href="' + d + '">Download File</a>').show();  
+				$('#file1').val(null);  
+			},  
+			error: function () {  
+				$('#updatePanelFile').addClass('alert-error').html('<strong>Failed!</strong> Please try again.').show();  
+			}  
+		});  
+	});  
+
 	$('#checkSubmit').click(function () {
 		var data = {
 			"email": $("#checkEmail").val(),
