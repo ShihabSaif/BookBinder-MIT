@@ -17,6 +17,8 @@ $(function () {
 		$(".UserProfileContainer").hide();
 		$(".userDetails").hide();
 		$(".newsfeed").hide();
+		$(".fileUpload").hide();
+		$(".FileApprovalBookDetails").hide();
 	}
 
 	var editBook = function (e) {
@@ -371,7 +373,7 @@ $(function () {
 		var outputStr = '';
 		if (!admin) {
 			for (var i = 0; i < bookList.length; i++) {
-				outputStr += '<tr>' + '<td><img src="C:/Users/A.B.M.SHIHAB UDDIN/Desktop/download.jpg" alt="" class="img-thumbnail" style="max-width:30%;margin-right:0px"></td>' + '<td scope="row">' + bookList[i].title + '</td><td>' + bookList[i].author + '</td><td>' + bookList[i].category + '</td><td>' + (bookList[i].review).toFixed(2) + '</td><td colspan="3">' + bookList[i].description + '</td><td><button class="btn btn-primary rateTheBook" data-id="' + bookList[i].bookId + '">Rating</button></td></tr>';
+				outputStr += '<tr>' + '<td scope="row">' + bookList[i].title + '</td><td>' + bookList[i].author + '</td><td>' + bookList[i].category + '</td><td>' + (bookList[i].review).toFixed(2) + '</td><td colspan="3">' + bookList[i].description + '</td><td><button class="btn btn-primary rateTheBook" data-id="' + bookList[i].bookId + '">Rating</button></td></tr>';
 			}
 		}
 		else {
@@ -406,6 +408,99 @@ $(function () {
 	};
 
 	$('#txtBtn').click(showSearchedBookFun);
+
+	var populateFileApprovalBook = function (bookList) {
+		var outputStr = '';
+		
+			for (var i = 0; i < bookList.length; i++) {
+				outputStr += '<tr><td scope="row">' + bookList[i].title + '</td><td>' + bookList[i].author + '</td><td>' + bookList[i].category + '</td><td>' + (bookList[i].review).toFixed(2) + '</td><td colspan="3">' + '<a href="' + bookList[i].image_link + '">Preview File</a>' + '</td><td><button class="btn btn-primary ApprovalByAdmin" data-id="' + bookList[i].bookId + '">Approve</button></td></tr>';
+			}
+		
+
+		$('#tblFileApprovalBody').html(outputStr);
+		$(".FileApprovalBookDetails").show();
+	};
+
+
+	var showPendingFile = function () {
+		hideAndSeek();
+		$.ajax ({
+			url: 'http://localhost:50477/api/User/AdminFileApproval',
+			method: 'GET',
+			header: 'Content-Type: application/json',
+			complete: function (xmlhttp) {
+				if (xmlhttp.status == 200) {
+					var bookList = xmlhttp.responseJSON;
+					populateFileApprovalBook(bookList);
+				}
+				else {
+					console.log("file approval failed");
+				}
+			}
+		});
+
+	};
+
+	$('#approveFile').click(showPendingFile);
+
+	// $('#tblFileApprovalBody').delegate('.ApprovalByAdmin', 'click', editFileApproval);
+
+	// $('#tblFileApprovalBody').on("click", "tr .ApprovalByAdmin", editFileApproval);
+
+	// $('.ApprovalByAdmin').click(editFileApproval);
+
+
+	$(document).on("click", ".ApprovalByAdmin" , function() {
+		var_id =$(this).attr("data-id");
+		$.ajax ({
+			url: 'http://localhost:50477/api/User/FileStatusApprove/' + var_id,
+			method: 'PUT',
+			header: 'Content-Type: application/json',
+			complete: function (xmlhttp) {
+				if (xmlhttp.status == 200) {
+					var bookList = xmlhttp.responseJSON;
+					if(bookList == true)
+					{
+						alert("File approved");
+					}
+				}
+				else {
+					alert("File approve failed");
+				}
+			}
+		});
+	});
+
+
+	var editFileApproval = function () 
+	{
+		console.log("okay");
+		alert("gotcha");
+		// hideAndSeek();
+		// $(".editContainer").show();
+		// var id = e.target.getAttribute('data-id');
+		// //$( "em" ).attr( "title" );
+		// //alert(id);
+		// $.ajax({
+		// 	url: 'http://localhost:50477//api//Book/' + parseInt(id),
+		// 	method: 'GET',
+		// 	header: 'Content-Type: application/json',
+		// 	complete: function (xmlhttp) {
+		// 		if (xmlhttp.status == 200) {
+		// 			var bookList = xmlhttp.responseJSON;
+		// 			$("#editTitle").val(bookList.title);
+		// 			$("#editAuthor").val(bookList.author);
+		// 			$("#editCategory").val(bookList.category);
+		// 			$("#editDescription").val(bookList.description);
+		// 			$("#editId").val(id);
+		// 		}
+		// 		else {
+		// 			$('#msg').html(xmlhttp.status + ": " + xmlhttp.statusText);
+		// 		}
+		// 	}
+		// });
+	}
+
 	
 	var globalUserId;
 	var globalGuestUserId;
@@ -432,12 +527,13 @@ $(function () {
 		 if(searchedUser==="true")
 		 {
 			$(".followUser").hide();
-			$(".requestedFollowUser").show();
 			$(".unfollowUser").show();
 		}
 		else 
 		{
 			alert("You already followed this user");
+			$(".followUser").hide();
+			$(".unfollowUser").show();
 		 }
 	}
 
@@ -514,9 +610,37 @@ $(function () {
 		var outputStr = '';
 		for(var i=0; i<showSearchedUser.length; i++)
 		{
-			outputStr += '<p>' + showSearchedUser[i].userName + " added " + showSearchedUser[i].bookTitle + " to his showcase." + '</p>';
-			//outputStr += '<button class="btn btn-primary followUser" data-id="' + searchedUser[i].userId + '">Follow</button>';
+			var status = showSearchedUser[i].readStatus;
+			var read_status = "";
+			if(status==1)
+			{
+				read_status = "already read";
+			}
+
+			if(status==2)
+			{
+				read_status = "currently reading";
+			}
+
+			if(status==3)
+			{
+				read_status = "want to read in future";
+			}
+			outputStr += '<div class="card">';
+			outputStr += '<div class="card-header">' + '<span class="newsfeed-name">' + showSearchedUser[i].userName + '</span>' + " added " + '<span class="newsfeed-name">' + showSearchedUser[i].bookTitle + '</span>' + " to his wishlist as " + '<span class="newsfeed-name">' + read_status + "." + '</span>' + '</div>';
+			// outputStr += '<div class="card-body">Body</div>';
+			outputStr += '<div class="card-body">' + 'Author : ' + showSearchedUser[i].author + '<br>' + " Category : " + showSearchedUser[i].category + '<br>' + 'Rating : ' + showSearchedUser[i].bookRating + '</div>';
+			outputStr += '<div class="card-footer">Footer</div>';
+			outputStr += '</div>';
+
+			outputStr += '<div class="card">';
+			outputStr += '<div class="card-header">' + '<span class="newsfeed-name">' + showSearchedUser[i].userName + '</span>' + " rated " + '<span class="newsfeed-name">' + showSearchedUser[i].bookTitle + '</span>' + " of " + '<span class="newsfeed-name">' + showSearchedUser[i].rating + " out of 5." + '</span>' + '</div>';
+			// outputStr += '<div class="card-body">Body</div>';
+			outputStr += '<div class="card-body">' + 'Author : ' + showSearchedUser[i].author + '<br>' + " Category : " + showSearchedUser[i].category + '<br>' + 'Rating : ' + showSearchedUser[i].bookRating + '</div>';
+			outputStr += '<div class="card-footer">Footer</div>';
+			outputStr += '</div>';
 		}		
+		console.log(outputStr);
 		$('.show-newsfeed').html(outputStr);
 		$(".newsfeed").show();
 	}
@@ -531,6 +655,7 @@ $(function () {
 			complete: function (xmlhttp) {
 				if (xmlhttp.status == 200) {
 					var searchedUser = xmlhttp.responseJSON;
+					console.log(searchedUser);
 					populateNewsFeed(searchedUser);
 					$("#txtSearchUser").val("");
 				}
@@ -560,6 +685,7 @@ $(function () {
 		credentials = "";
 		admin = false;
 		$("#createBookBtn").hide();
+		$("#approveFile").hide();
 		$("#profileName").text("");
 		$("#profileEmail").text("");
 		$("#averageRatingUser").text("");
@@ -674,30 +800,84 @@ $(function () {
 		});
 	};
 
-	$('#btnPostFile').click(function () {  
+	// $( "#tblFileApprovalBody" ).delegate( ".fileDownload", "click", function() {
+	// 	var bookID = 4;
+
+	// 	$.ajax({  
+	// 		url: 'http://localhost:50477//api//User/download/' + bookID,  
+	// 		type: 'GET',  
+	// 		contentType: false,  
+	// 		processData: false,  
+	// 		success: function (d) {  
+	// 			if(d=="false")
+	// 			{
+	// 				alert("Download is not available");
+	// 			}  
+	// 			else
+	// 			{
+	// 				document.getElementById('myUniqueLinkId').href = d;
+	// 			}
+	// 		},  
+	// 		error: function () {  
+	// 			console.log("error");
+	// 		}  
+	// 	});
+	//   });
+
+	$( ".list-group-item" ).delegate( ".fileDownload", "click", function() {
+		var bookID = $("#modalId").val();
+
+		$.ajax({  
+			url: 'http://localhost:50477//api//User/download/' + bookID,  
+			type: 'GET',  
+			contentType: false,  
+			processData: false,  
+			success: function (d) {  
+				if(d=="false")
+				{
+					alert("Download is not available");
+				}  
+				else
+				{
+					document.getElementById('myUniqueLinkId').href = d;
+				}
+			},  
+			error: function () {  
+				console.log("error");
+			}  
+		});
+	  });
+
+	$( ".list-group-item" ).delegate( "#btnPostFile", "click", function() 
+	{ 		
+		console.log("inside main file upload");
 		if ($('#file1').val() == '') {  
 			alert('Please select file');  
 			return;  
 		}  
 
+		var bookID = $("#modalId").val();
+		console.log(bookID);
 		var formData = new FormData();  
 		var file = $('#file1')[0];  
 		formData.append('file', file.files[0]);  
 		$.ajax({  
-			url: 'http://localhost:50477//api//User/upload',  
+			url: 'http://localhost:50477//api//User/upload/' + bookID,  
 			type: 'POST',  
 			data: formData,  
 			contentType: false,  
 			processData: false,  
 			success: function (d) {  
-				$('#updatePanelFile').addClass('alert-success').html('<strong>Upload Done!</strong><a href="' + d + '">Download File</a>').show();  
+				$('#updatePanelFile').html('<strong>Upload Done!</strong><a href="' + d + '">Download File</a>').show();  
 				$('#file1').val(null);  
 			},  
 			error: function () {  
 				$('#updatePanelFile').addClass('alert-error').html('<strong>Failed!</strong> Please try again.').show();  
 			}  
 		});  
-	});  
+	});
+	
+	
 
 	$('#checkSubmit').click(function () {
 		var data = {
@@ -718,8 +898,10 @@ $(function () {
 					if (data.email == 'admin@gmail.com' && data.password == '123') {
 						admin = true;
 						$("#createBookBtn").show();
+						$("#approveFile").show();
 					}
 					id = data.userId;
+					sessionStorage.setItem("loginId",data.userId);
 					globalUserId = data.userId;
 					credentials = email + ":" + password;
 					$("#checkEmail").val(""),
@@ -742,6 +924,8 @@ $(function () {
 
 	/////////////////////    User Profile    ////////////////////
 
+	var loggedInUserId = "";
+
 	var getUser = function () {
 		$.ajax({
 			url: 'http://localhost:50477//api//User/' + id,
@@ -758,6 +942,8 @@ $(function () {
 					$("#averageRatingUser").text((user.averageRating).toFixed(2));
 					$("#totalRead").text(user.bookCount);
 					$("#userImage").text(user.image_link);
+					loggedInUserId = user.userId;
+					console.log(user.userId);
 				}
 				else {
 					alert("Login failed!!");
@@ -858,6 +1044,38 @@ $(function () {
 			}
 		});
 	});
+
+	var populateFollowingForUser = function (FollowingList) {
+		var outputStr = '';
+
+		for (var i = 0; i < FollowingList.length; i++) {
+			outputStr += '<tr><td scope="row">' + FollowingList[i].user_name + '</td><td>'  + '</td></tr>';
+		}
+
+		$('#profileFollow').html(outputStr);
+		//$(".BookDetails").show();
+	};
+
+	var fetchfollowingUser = function(value){
+		console.log(loggedInUserId);
+		$.ajax({
+			url: 'http://localhost:50477//api//FollowUser/AllFollow/' + loggedInUserId,
+			method: 'GET',
+			headers: {
+				"Authorization": "Basic " + btoa(credentials)
+			},
+			complete: function (xmlhttp) {
+				if (xmlhttp.status == 200) {
+					populateFollowingForUser(xmlhttp.responseJSON);
+				}
+				else {
+					$('#msg').html(xmlhttp.status + ": " + xmlhttp.statusText);
+				}
+			}
+		});
+	};
+
+	$('#ProfileFollowingList').click(fetchfollowingUser);
 
 	var populateBookForUser = function (bookList) {
 		var outputStr = '';

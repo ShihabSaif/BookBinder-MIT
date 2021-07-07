@@ -95,38 +95,37 @@
                 </tbody>
             </table>
         </div>
-
-        <div class="row BookDetails" style="display: none;">
-            <button id="createBookBtn" class="col-sm-2 offset-sm-5 btn btn-primary mb-2" style="display: none;">Create Books</button>
-            <button id="showBook" class="col-sm-2 offset-sm-5 btn btn-primary mb-2">Show All Books</button>
-            <br>
-            <br>
-            <table class="table table-striped table-hover" id="list">
-                <thead>
-                    <tr>
-                        <th scope="col">Image</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Author</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Rating</th>
-                        <th scope="col" colspan="3">Description</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody id="tblBody">
-                </tbody>
-            </table>
-        </div>
     </div>
 
-    <div class="container-fluid">
-        <div class="row userDetails" style="display: none;">
-            <div class="show-searched-user">
+    <div class="row BookDetails" style="display: none;">
+        <button id="approveFile" class="col-sm-2 offset-sm-5 btn btn-primary mb-2" style="display: none;">Pending File Approval</button>
+        <button id="createBookBtn" class="col-sm-2 offset-sm-5 btn btn-primary mb-2" style="display: none;">Create Books</button>
+        <button id="showBook" class="col-sm-2 offset-sm-5 btn btn-primary mb-2">Show All Books</button>
+        <br>
+        <br>
+        <table class="table table-striped table-hover" id="list">
+            <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Rating</th>
+                    <th scope="col" colspan="3">Description</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody id="tblBody">
+            </tbody>
+        </table>
+    </div>
+
     
-            </div>
+    <div class="row userDetails" style="display: none; ">
+        <div class="show-searched-user">
+
         </div>
     </div>
-</div>
+    
     
 <!-- <div class="container LogInContainer" style="display: none;">
     <div class="d-flex justify-content-center h-100">
@@ -161,20 +160,36 @@
 </div> -->
 
     
-        <div class="row LogInContainer" style="display: none;">
-            <div>
-                <input required type="email" class="span3" name="email" id="checkEmail" required placeholder="Email">
-            </div>
-            <div>
-                <input required type="password" class="span3" name="password" id="checkPassword" required placeholder="Password">
-            </div>
-            <div id="message"></div>
-            <div>
-                <p id="registrationLink">Don't have an account?</p>
-            </div>
-            <div>
-                <button type="submit" id="checkSubmit" class="btn btn-primary">Sign in</button>
-            </div>
+        <div class="container LogInContainer" style="display: none;">
+            <div class="d-flex justify-content-center">
+                <div class="card">
+
+                    <div class="card-header">
+                        <h3>Sign In</h3>
+                    </div>
+
+                    <div class="card-body">
+                        <div>
+                            <input required type="email" name="email" id="checkEmail" required placeholder="Email">
+                        </div>
+                        <div>
+                            <input style="margin-top: 20px;" required type="password" name="password" id="checkPassword" required placeholder="Password">
+                        </div>
+                        <div>
+                            <button style="margin-top: 20px;" type="submit" id="checkSubmit" class="btn btn-primary">Sign in</button>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <div id="message"></div>
+                        <div>
+                            <p>Don't have an account?</p>
+                            <!-- <button id="registrationLink" class="btn btn-primary">Click Here</button> -->
+                            <a href="#" id="registrationLink">Click Here</a>
+                        </div>
+                    </div>                                                    
+                </div>              
+            </div>          
         </div>
    
 
@@ -197,17 +212,14 @@
             <button type="submit" id="createUser" class="col-sm-9 offset-md-2 btn btn-primary mb-2">Create Account</button>
         </div>
 
-        <div>  
-            <div class="form-group">  
-                <div id="updatePanelFile" class="alert" role="alert" style="display:none;">  
-      
-                </div>  
+        <!-- <li class="list-group-item">  
+            <div id="updatePanelFile" style="display:none;">  
+    
             </div>  
-            <div class="col-md-12" style="text-align:center;margin-bottom:10px;">  
-                <input type="file" id="file1" class="btn btn-primary" />  
-            </div>  
+
+            <input type="file" id="file1" class="btn btn-primary" />  
             <input id="btnPostFile" class="button button4" type="button" value="Upload" />  
-        </div> 
+        </li>  -->
 
     <div class="row editContainer" style="display: none;">
         <!-- <button id="editBook1" class="col-sm-9 offset-md-2 btn btn-primary mb-2">EditBook1</button> -->
@@ -270,6 +282,23 @@
         <!-- </form> -->
     </div>
 
+    <div class="row FileApprovalBookDetails" style="display: none;">
+        <table class="table table-striped table-hover" id="list">
+            <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Rating</th>
+                    <th scope="col" colspan="3">Description</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody id="tblFileApprovalBody">
+            </tbody>
+        </table>
+    </div>
+
 
     <div class="row editUserContainer" style="display: none;">
         <label class="col-sm-2 col-form-label">User Name</label>
@@ -286,7 +315,6 @@
 
     <div class="UserProfileContainer" style="display: none;">
         <div class="row">
-            <!-- <button id="loadProfile">Load Profile</button> -->
             <div class="col-md-3">
                 <div class="card" style="margin:10px">
                     <div class="card-body">
@@ -299,7 +327,6 @@
                             </li>                           
                             <li class="list-group-item">
                                 <select name="readStatus" id="userOptionSelect">
-                                    <!-- onchange="LoadList(this)"> -->
                                     <option value="" selected disabled hidden>Choose here</option>
                                     <option value="0">Show All Books</option>
                                     <option value="1">Already Read</option>
@@ -307,14 +334,12 @@
                                     <option value="3">Want to Read</option>
                                 </select>
                             </li>
-                            <li>
-                                <img src="" alt="imageTag" id="userImage">
-                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-md-9">
+
+            <div class="col-md-6">
                 <div class="jumbotron jumbotron-fluid" style="margin:10px">
                     <div class="container">
                         <h1 class="display-4" id="profileName"></h1>
@@ -325,7 +350,23 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-3">
+                <table class="table table-striped table-hover" id="list">
+                    <thead>
+                        <tr>
+                            <th scope="col">Following</th>
+                            <th scope="col">Unfollow</th>
+                        </tr>
+                    </thead>
+                    <tbody id="profileFollow">
+                    </tbody>
+                </table>
+                <button class="btn btn-primary" id="ProfileFollowingList">See Following List</button>
+            </div>
+
         </div>
+
         <div class="row">
             <table class="table table-striped table-hover" id="list">
                 <thead>
@@ -339,35 +380,21 @@
                     </tr>
                 </thead>
                 <tbody id="profileTable">
-                </tbody>
-            </table>
-            <!-- <div class="col-md-12">
-                <div id="AlreadyRead" class="jumbotron jumbotron-fluid" style="margin:10px">
-                    <h3 style="margin:20px;font-family:Comic Sans MS">Books that already have been read by </h3>
-
-                </div>
-                <div id="CurrentlyRead" class="jumbotron jumbotron-fluid" style="margin:10px">
-                    <h3 style="margin:20px;font-family:Comic Sans MS">Books that currently reading.</h3>
-
-                </div>
-                <div id="WantRead" class="jumbotron jumbotron-fluid" style="margin:10px">
-                    <h3 style="margin:20px;font-family:Comic Sans MS">Books that wants to read.</h3>
-
-                </div>
-            </div> -->
+                </tbody> 
+            </table>              
         </div>
     </div>
 
 
         <!-- Newsfeed -->
 
-        <div class="container-fluid">
-            <div class="row newsfeed" style="display: none;">
-                <div class="show-newsfeed">
-        
-                </div>
+    <div class="container-fluid">
+        <div class="row newsfeed" style="display: none;">
+            <div class="show-newsfeed" style="margin: auto;">
+    
             </div>
         </div>
+    </div>
 
 
 
@@ -441,10 +468,18 @@
                                             <p id="modalDescription"></p>
                                         </li>    
                                         
-                                        <li class="list-group-item">Upload Book:
-                                            <input class="form-control" type="file" id="modalBookUpload"/>
-                                            <button type="button" class="btn btn-primary" id="uploadFile">Upload</button>
+                                        <li class="list-group-item">  
+                                            <div id="updatePanelFile" style="display:none;">  
+                                    
+                                            </div>  
+                                
+                                            <input type="file" id="file1" class="btn btn-primary" />  
+                                            <input id="btnPostFile" class="button button4" style="margin-top: 10px;" type="button" value="Upload" />  
                                         </li>
+
+                                        <li class="list-group-item">
+                                            <a href="#" id="myUniqueLinkId" class="fileDownload">Download File</a>
+                                        </li> 
                                     </ul>
                                 </div>
                             </div>
@@ -469,12 +504,6 @@
 
 
     <!-- Footer -->
-    <footer class="py-5 footer-transparent">
-        <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; ATP 2 Project</p>
-        </div>
-        <!-- /.container -->
-    </footer>
     <footer class="footer footer-transparent">
         <div class="container">
             <p class="m-0 text-center">Copyright &copy; Shihab</p>
