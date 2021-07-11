@@ -510,7 +510,7 @@ $(function () {
 		for(var i=0; i<searchedUser.length; i++)
 		{
 			globalGuestUserId = searchedUser[i].userId;
-			outputStr += '<h1>' + searchedUser[i].email + globalUserId + '</h1>';
+			outputStr += '<h1>' + searchedUser[i].email + '</h1>';
 			outputStr += '<button class="btn btn-primary followUser" data-id="' + searchedUser[i].userId + '">Follow</button>';
 			outputStr += '<button style="margin-left:30px;display: none" class="btn btn-primary requestedFollowUser" data-id="' + searchedUser[i].userId + '">Requested</button>';
 			outputStr += '<button style="margin-left:30px;display: none" class="btn btn-primary unfollowUser" data-id="' + searchedUser[i].userId + '">Unfollow</button>';
@@ -626,21 +626,31 @@ $(function () {
 			{
 				read_status = "want to read in future";
 			}
+
+			var formattedDate = new Date(showSearchedUser[i].statusDate);
+			var d = formattedDate.getDate();
+			var m =  formattedDate.getMonth();
+			m += 1;  // JavaScript months are 0-11
+			var y = formattedDate.getFullYear();
+			var actualDate = d + "/" + m + "/" + y;
+			// console.log(actualDate);
+
+
 			outputStr += '<div class="card">';
 			outputStr += '<div class="card-header">' + '<span class="newsfeed-name">' + showSearchedUser[i].userName + '</span>' + " added " + '<span class="newsfeed-name">' + showSearchedUser[i].bookTitle + '</span>' + " to his wishlist as " + '<span class="newsfeed-name">' + read_status + "." + '</span>' + '</div>';
 			// outputStr += '<div class="card-body">Body</div>';
 			outputStr += '<div class="card-body">' + 'Author : ' + showSearchedUser[i].author + '<br>' + " Category : " + showSearchedUser[i].category + '<br>' + 'Rating : ' + showSearchedUser[i].bookRating + '</div>';
-			outputStr += '<div class="card-footer">Footer</div>';
+			outputStr += '<div class="card-footer">' + actualDate + '</div>';
 			outputStr += '</div>';
 
 			outputStr += '<div class="card">';
 			outputStr += '<div class="card-header">' + '<span class="newsfeed-name">' + showSearchedUser[i].userName + '</span>' + " rated " + '<span class="newsfeed-name">' + showSearchedUser[i].bookTitle + '</span>' + " of " + '<span class="newsfeed-name">' + showSearchedUser[i].rating + " out of 5." + '</span>' + '</div>';
 			// outputStr += '<div class="card-body">Body</div>';
 			outputStr += '<div class="card-body">' + 'Author : ' + showSearchedUser[i].author + '<br>' + " Category : " + showSearchedUser[i].category + '<br>' + 'Rating : ' + showSearchedUser[i].bookRating + '</div>';
-			outputStr += '<div class="card-footer">Footer</div>';
+			outputStr += '<div class="card-footer">' + actualDate + '</div>';
 			outputStr += '</div>';
+			// console.log(showSearchedUser[i]);
 		}		
-		console.log(outputStr);
 		$('.show-newsfeed').html(outputStr);
 		$(".newsfeed").show();
 	}
@@ -943,7 +953,7 @@ $(function () {
 					$("#totalRead").text(user.bookCount);
 					$("#userImage").text(user.image_link);
 					loggedInUserId = user.userId;
-					console.log(user.userId);
+					// console.log(user.userId);
 				}
 				else {
 					alert("Login failed!!");
@@ -1049,7 +1059,12 @@ $(function () {
 		var outputStr = '';
 
 		for (var i = 0; i < FollowingList.length; i++) {
-			outputStr += '<tr><td scope="row">' + FollowingList[i].user_name + '</td><td>'  + '</td></tr>';
+			outputStr += '<tr><td scope="row">' + FollowingList[i].user_name + '</td><td>'  + '</td>'; 
+			// console.log(FollowingList[i].guestUserId);
+			// outputStr += '<td><button class="btn btn-primary unfollowUser" data-id="' + FollowingList[i].guestUserId + '">Unfollow</button></td>'; 
+			outputStr += '</tr>';
+
+			// outputStr += '<td><button style="margin-left:30px;display: none" class="btn btn-primary unfollowUser" data-id="' + FollowingList[i].userId + '">Unfollow</button></td>';
 		}
 
 		$('#profileFollow').html(outputStr);
@@ -1067,6 +1082,7 @@ $(function () {
 			complete: function (xmlhttp) {
 				if (xmlhttp.status == 200) {
 					populateFollowingForUser(xmlhttp.responseJSON);
+					// console.log(xmlhttp.responseJSON);
 				}
 				else {
 					$('#msg').html(xmlhttp.status + ": " + xmlhttp.statusText);
