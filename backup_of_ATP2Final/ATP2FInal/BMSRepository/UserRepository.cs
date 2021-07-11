@@ -80,6 +80,7 @@ namespace BMSRepository
                           userbook.BookId,
                           userbook.readStatus,
                           userbook.Rating,
+                          userbook.statusDate,
                           followuser.MainUserId,
                           followuser.GuestUserId
                       }).Where(x => x.MainUserId == id).
@@ -91,6 +92,7 @@ namespace BMSRepository
                           uf.readStatus,
                           uf.Rating,
                           uf.MainUserId,
+                          uf.statusDate,
                           book.title,
                           book.author,
                           book.category,
@@ -105,6 +107,7 @@ namespace BMSRepository
                           author = userFollow.author,
                           category = userFollow.category,
                           bookRating = userFollow.review,
+                          statusDate = userFollow.statusDate,
                           userName = user.user_name
                       }).ToList();
                      

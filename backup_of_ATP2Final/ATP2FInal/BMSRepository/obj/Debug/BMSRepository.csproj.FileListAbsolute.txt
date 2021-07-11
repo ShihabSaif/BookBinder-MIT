@@ -43,3 +43,18 @@ C:\Users\A.B.M.SHIHAB UDDIN\Desktop\backup_of_ATP2Final\ATP2FInal\BMSRepository\
 C:\Users\A.B.M.SHIHAB UDDIN\Desktop\backup_of_ATP2Final\ATP2FInal\BMSRepository\obj\Debug\BMSRepository.csproj.CopyComplete
 C:\Users\A.B.M.SHIHAB UDDIN\Desktop\backup_of_ATP2Final\ATP2FInal\BMSRepository\obj\Debug\BMSRepository.exe
 C:\Users\A.B.M.SHIHAB UDDIN\Desktop\backup_of_ATP2Final\ATP2FInal\BMSRepository\obj\Debug\BMSRepository.pdb
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSRepository\bin\Debug\BMSRepository.exe.config
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSRepository\bin\Debug\BMSRepository.exe
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSRepository\bin\Debug\BMSRepository.pdb
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSRepository\bin\Debug\BMSEntity.exe
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSRepository\bin\Debug\EntityFramework.dll
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSRepository\bin\Debug\EntityFramework.SqlServer.dll
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSRepository\bin\Debug\BMSEntity.pdb
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSRepository\bin\Debug\BMSEntity.exe.config
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSRepository\bin\Debug\EntityFramework.xml
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSRepository\bin\Debug\EntityFramework.SqlServer.xml
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSRepository\obj\Debug\BMSRepository.csproj.AssemblyReference.cache
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSRepository\obj\Debug\BMSRepository.csproj.CoreCompileInputs.cache
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSRepository\obj\Debug\BMSRepository.csproj.CopyComplete
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSRepository\obj\Debug\BMSRepository.exe
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSRepository\obj\Debug\BMSRepository.pdb

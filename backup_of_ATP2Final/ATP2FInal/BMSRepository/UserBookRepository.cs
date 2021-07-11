@@ -128,6 +128,7 @@ namespace BMSRepository
 
         public int Insert(UserBook bk)
         {
+            bk.statusDate = DateTime.Today;
             context.userBooks.Add(bk);
             int value = context.SaveChanges();
 
@@ -176,6 +177,8 @@ namespace BMSRepository
                     bk.readStatus = book.readStatus;
                 if (book.Rating != 0)
                     bk.Rating = book.Rating;
+
+                bk.statusDate = DateTime.Today;
 
                 context.SaveChanges();
 

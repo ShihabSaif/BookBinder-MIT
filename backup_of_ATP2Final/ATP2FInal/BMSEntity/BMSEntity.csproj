@@ -68,6 +68,10 @@
     <Compile Include="Migrations\202106201554063_status_in_book_table.designer.cs">
       <DependentUpon>202106201554063_status_in_book_table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202107111132191_date_time_added_in_userBook_model.cs" />
+    <Compile Include="Migrations\202107111132191_date_time_added_in_userBook_model.designer.cs">
+      <DependentUpon>202107111132191_date_time_added_in_userBook_model.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -87,6 +91,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202106201554063_status_in_book_table.resx">
       <DependentUpon>202106201554063_status_in_book_table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107111132191_date_time_added_in_userBook_model.resx">
+      <DependentUpon>202107111132191_date_time_added_in_userBook_model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -43,3 +43,20 @@ C:\Users\A.B.M.SHIHAB UDDIN\Desktop\backup_of_ATP2Final\ATP2FInal\BMSEntity\obj\
 C:\Users\A.B.M.SHIHAB UDDIN\Desktop\backup_of_ATP2Final\ATP2FInal\BMSEntity\obj\Debug\BMSEntity.pdb
 C:\Users\A.B.M.SHIHAB UDDIN\Desktop\backup_of_ATP2Final\ATP2FInal\BMSEntity\obj\Debug\BMSEntity.Migrations.status_in_book_table.resources
 C:\Users\A.B.M.SHIHAB UDDIN\Desktop\backup_of_ATP2Final\ATP2FInal\BMSEntity\obj\Debug\BMSEntity.csproj.AssemblyReference.cache
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSEntity\bin\Debug\BMSEntity.exe.config
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSEntity\bin\Debug\BMSEntity.exe
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSEntity\bin\Debug\BMSEntity.pdb
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSEntity\bin\Debug\EntityFramework.dll
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSEntity\bin\Debug\EntityFramework.SqlServer.dll
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSEntity\bin\Debug\EntityFramework.xml
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSEntity\bin\Debug\EntityFramework.SqlServer.xml
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSEntity\obj\Debug\BMSEntity.Migrations.creating_database.resources
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSEntity\obj\Debug\BMSEntity.Migrations.MFollowUser.resources
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSEntity\obj\Debug\BMSEntity.Migrations.status_in_book_table.resources
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSEntity\obj\Debug\BMSEntity.csproj.GenerateResource.cache
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSEntity\obj\Debug\BMSEntity.csproj.CoreCompileInputs.cache
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSEntity\obj\Debug\BMSEntity.csproj.CopyComplete
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSEntity\obj\Debug\BMSEntity.exe
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSEntity\obj\Debug\BMSEntity.pdb
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSEntity\obj\Debug\BMSEntity.Migrations.date_time_added_in_userBook_model.resources
+D:\on going final project\backup_of_ATP2Final\ATP2FInal\BMSEntity\obj\Debug\BMSEntity.csproj.AssemblyReference.cache

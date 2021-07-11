@@ -15,5 +15,7 @@ namespace BMSEntity
         public int BookId { get; set; }
         public int readStatus { get; set; }
         public int Rating { get; set; }
+
+        public DateTime statusDate { get; set; }
     }
 }

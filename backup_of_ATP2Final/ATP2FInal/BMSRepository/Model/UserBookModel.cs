@@ -25,5 +25,8 @@ namespace BMSRepository.Model
         public String category { get; set; }
 
         public String userName { get; set; }
+
+        public DateTime statusDate { get; set; }
+
     }
 }
