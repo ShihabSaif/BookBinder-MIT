@@ -1,0 +1,253 @@
+public function SaveImport(Request $request)
+    {
+
+        $input_files = $request->file('attachment');
+        $file_array = array();
+        $count_files = 0;
+        $individual_file_name="";
+
+        if($input_files!=null)
+        {
+            foreach ($input_files as $file)
+            {
+                $individual_file_extension = $file->extension();
+                $individual_file_name = "C&F_ImportBill_DOC_" . "bill_code" . rand() . "_TIMESTAMP_" .time(). "." .$individual_file_extension;
+                $individual_file_path = $file->storeAs('public/import',$individual_file_name);
+                array_push($file_array,$individual_file_name);
+                $individual_file_name="";
+                $count_files = $count_files + 1;
+            }
+        }
+
+        $attachments = json_encode($file_array);
+        // echo gettype($attachments);
+
+
+
+        $bill_date = $request->input("bill_date");
+
+        $bill_timestamp = DateTime::createFromFormat('d/m/Y', $bill_date);
+
+         if($bill_timestamp) {
+             $bill_timestamp = $bill_timestamp->getTimestamp();
+         }
+
+         $bill_dd = date('d', $bill_timestamp);
+         $bill_mm = date('m', $bill_timestamp);
+         $bill_yyyy = date('Y', $bill_timestamp);
+
+        $id = $request->input("id");
+        $user_id = $this->AUTH_USER->id;
+        $bill_type = "Import";
+        $bill_code = $request->input("bill_code");
+        $client_id = $request->input("client_id");
+        $client_address = $request->input("client_address") ?: "";
+        $supplier_id = $request->input("supplier_id");
+        $client_bank_name = $request->input("client_bank_name") ?: "";
+        $port_id = $request->input("port_id") ?: 0;
+        $carrier = $request->input("carrier") ?: "";
+        $mawb_no = $request->input("mawb_no") ?: "";
+        $mawb_date = $request->input("mawb_date") ?: "";
+        $hawb_no = $request->input("hawb_no") ?: "";
+        $hawb_date = $request->input("hawb_date") ?: "";
+        $lc_no = $request->input("lc_no") ?: "";
+        $lc_date = $request->input("lc_date") ?: "";
+        $be_no = $request->input("be_no") ?: "";
+        $be_date = $request->input("be_date") ?: "";
+        $invoice_no = $request->input("invoice_no") ?: "";
+        $invoice_date = $request->input("invoice_date") ?: "";
+        $commodity = $request->input("commodity") ?: "";
+        $currency_id = $request->input("currency_id") ?: 0;
+        $currency_rate = $request->input("currency_rate") ?: "";
+        $invoice_value = $request->input("invoice_value") ?: "";
+        $a_value = $request->input("a_value") ?: "";
+        $gross_weight = $request->input("gross_weight") ?: "";
+        $net_weight = $request->input("net_weight") ?: "";
+        $unit_id = $request->input("unit_id") ?: 0;
+        $quantity = $request->input("quantity") ?: "";
+        $goods_description = $request->input("goods_description") ?: "";
+        $enc_docs = $request->input("enc_docs") ?: "";
+        $particulars_charges = $request->input("particulars_charges") ?: "";
+        $total_amount = $request->input("total_amount") ?: "";
+        $paid_amount = $request->input("paid_amount") ?: "";
+        $due_amount = $request->input("due_amount") || "";
+        $full_paid = (((float) $total_amount > 0)) ? (((float) $due_amount > 0) ? 0 : 1) : 0;
+        $bill_note = $request->input("bill_note") ?: "";
+        $job_date = "";
+        $CreatedAt = date("Y-m-d H:i:s", time());
+
+        $save_import = bill_entry_list::where('id', '=', $id)
+            ->where('CompanyID', '=', $this->AUTH_USER->CompanyID)
+            ->where('BranchID', '=', $this->AUTH_USER->BranchID);
+
+        if($save_import->exists()) {
+
+            //Update Import_bill_list
+            if ($this->MODULE_PERMISSIONS === true || $this->MODULE_PERMISSIONS->Edit) {
+
+                //if(full_paid status is not pending but paid) msg("you are not allowed to update this")
+                $get_status = bill_entry_list::where("id", "=", $id)->first();
+
+                if($get_status->full_paid == 1)
+                {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'you are not allowed to update this!',
+                    ]);
+                }
+                else
+                {
+                    try {
+                        $save_import->update([
+                            'user_id' => $user_id,
+                            'bill_type' => $bill_type,
+                            'bill_code' => $bill_code,
+                            'client_id' => $client_id,
+                            'client_address' => $client_address,
+                            'supplier_id' => $supplier_id,
+                            'client_bank_name' => $client_bank_name,
+                            'port_id' => $port_id,
+                            'carrier' => $carrier,
+                            'mawb_no' => $mawb_no,
+                            'mawb_date' => $mawb_date,
+                            'hawb_no' => $hawb_no,
+                            'hawb_date' => $hawb_date,
+                            'lc_no' => $lc_no,
+                            'lc_date' => $lc_date,
+                            'be_no' => $be_no,
+                            'be_date' => $be_date,
+                            'invoice_no' => $invoice_no,
+                            'invoice_date' => $invoice_date,
+                            'commodity' => $commodity,
+                            'currency_id' => $currency_id,
+                            'currency_rate' => $currency_rate,
+                            'invoice_value' => $invoice_value,
+                            'a_value' => $a_value,
+                            'gross_weight' => $gross_weight,
+                            'net_weight' => $net_weight,
+                            'unit_id' => $unit_id,
+                            'quantity' => $quantity,
+                            'goods_description' => $goods_description,
+                            'enc_docs' => $enc_docs,
+                            'particulars_charges' => $particulars_charges,
+                            'attachments' => $attachments,
+                            'total_amount' => $total_amount,
+                            'paid_amount' => $paid_amount,
+                            'due_amount' => $due_amount,
+                            'full_paid' => $full_paid,
+                            'bill_note' => $bill_note,
+                            'job_date' => $job_date,
+                            'bill_dd' => $bill_dd,
+                            'bill_mm' => $bill_mm,
+                            'bill_yyyy' => $bill_yyyy,
+                            'bill_date' => $bill_date,
+                            'bill_timestamp' => $bill_timestamp,
+                            'UpdatedBy' => $this->AUTH_USER->id,
+                            'updated_at' => $CreatedAt,
+                        ]);
+
+                        return response()->json([
+                            'success' => true,
+                            'message' => 'Import bill updated successfully!',
+                        ]);
+                    } catch (Exception $exception) {
+                        return response()->json([
+                            'success' => false,
+                            'error_code' => 'DB_ERROR',
+                            'message' => 'Failed to update! ' . $exception->getMessage(),
+                        ]);
+                    }
+                }
+
+
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'error_code' => 'PERMISSION_DENIED',
+                    'message' => 'Access Denied! You need permission to perform this action!',
+                ], 403);
+            }
+
+        } else {
+
+            //Insert a new Import bill
+            if ($this->MODULE_PERMISSIONS === true || $this->MODULE_PERMISSIONS->Add) {
+                $SysCode = new SysCodeController();
+
+                try {
+                    bill_entry_list::Insert([
+                        'Code' => $SysCode->GenerateNewCode($this->MODULE_CODE, $this->DOC_CODE_ZEROES_LENGTH),
+                        'CompanyID' => $this->AUTH_USER->CompanyID,
+                        'BranchID' => $this->AUTH_USER->BranchID,
+                        'user_id' => $user_id,
+                        'bill_type' => $bill_type,
+                        'bill_code' => $bill_code,
+                        'client_id' => $client_id,
+                        'client_address' => $client_address,
+                        'supplier_id' => $supplier_id,
+                        'client_bank_name' => $client_bank_name,
+                        'port_id' => $port_id,
+                        'carrier' => $carrier,
+                        'mawb_no' => $mawb_no,
+                        'mawb_date' => $mawb_date,
+                        'hawb_no' => $hawb_no,
+                        'hawb_date' => $hawb_date,
+                        'lc_no' => $lc_no,
+                        'lc_date' => $lc_date,
+                        'be_no' => $be_no,
+                        'be_date' => $be_date,
+                        'invoice_no' => $invoice_no,
+                        'invoice_date' => $invoice_date,
+                        'commodity' => $commodity,
+                        'currency_id' => $currency_id,
+                        'currency_rate' => $currency_rate,
+                        'invoice_value' => $invoice_value,
+                        'a_value' => $a_value,
+                        'gross_weight' => $gross_weight,
+                        'net_weight' => $net_weight,
+                        'unit_id' => $unit_id,
+                        'quantity' => $quantity,
+                        'goods_description' => $goods_description,
+                        'enc_docs' => $enc_docs,
+                        'particulars_charges' => $particulars_charges,
+                        'attachments' => $attachments,
+                        'total_amount' => $total_amount,
+                        'paid_amount' => $paid_amount,
+                        'due_amount' => $due_amount,
+                        'full_paid' => $full_paid,
+                        'bill_note' => $bill_note,
+                        'job_date' => $job_date,
+                        'bill_dd' => $bill_dd,
+                        'bill_mm' => $bill_mm,
+                        'bill_yyyy' => $bill_yyyy,
+                        'bill_date' => $bill_date,
+                        'bill_timestamp' => $bill_timestamp,
+                        'CreatedBy' => $this->AUTH_USER->id,
+                        'CreatedAt' => $CreatedAt,
+                    ]);
+
+                    $SysCode->UpdateIncrement($this->MODULE_CODE);
+
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Import Bill created successfully!'
+
+                    ]);
+                } catch (Exception $exception) {
+                    return response()->json([
+                        'success' => false,
+                        'error_code' => 'DB_ERROR',
+                        'message' => 'Failed to create! ' . $exception->getMessage(),
+                    ]);
+                }
+
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'error_code' => 'PERMISSION_DENIED',
+                    'message' => 'Access Denied! You need permission to perform this action!',
+                ], 403);
+            }
+
+        }
+    }
